@@ -1,0 +1,24 @@
+$column: 200px;
+
+@component-namespace lp {
+
+    @component Tabs {
+        padding: 0;
+        margin: 0;
+        width: $column;
+
+        @modifier advanced {
+            padding: 1rem;
+        }
+
+        @descendent header {
+            border: 1px solid #ccc;
+
+            @when invalid {
+                border: 1px solid red;
+            }
+        }
+
+    }
+
+}
