@@ -3,22 +3,27 @@ $column: 200px;
 @component-namespace lp {
 
     @component Tabs {
-        padding: 0;
-        margin: 0;
-        width: $column;
 
-        @modifier advanced {
+        @modifier simple {
             padding: 1rem;
         }
 
-        @descendent header {
+        @descendent Tab {
             border: 1px solid #ccc;
 
-            @when invalid {
-                border: 1px solid red;
-            }
+          @when selected {
+              border: 1px solid red;
+          }
+        }
+
+
+        @descendent TabPanel {
+            border: 1px solid #ccc;
+
+          @when selected {
+              border: 1px solid blue;
+          }
         }
 
     }
-
 }

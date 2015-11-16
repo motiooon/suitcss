@@ -6,20 +6,20 @@ var _tabs = require('./scripts/tabs');
 
 var _tabs2 = _interopRequireDefault(_tabs);
 
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
 var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _react2.default.render(_react2.default.createElement(_tabs2.default, { foo: 'bar' }), document.getElementById('tabs-holder'));
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/app.js","/")
-},{"./scripts/tabs":167,"_process":6,"buffer":2,"react":166,"react-dom":7}],2:[function(require,module,exports){
+},{"./scripts/tabs":172,"_process":6,"buffer":2,"react":166,"react-dom":7}],2:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 /*!
  * The buffer module from node.js, for the browser.
@@ -22007,6 +22007,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _reactSuitcssify = require('react-suitcssify');
 
 var _reactSuitcssify2 = _interopRequireDefault(_reactSuitcssify);
@@ -22022,31 +22026,431 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // Suit css included as an utility method, decorator are having a issue with babel 6
 var getClassName = _reactSuitcssify2.default.utility;
 
+// @SuitCssify.decorator
+
+var TabPanel = (function (_Component) {
+  _inherits(TabPanel, _Component);
+
+  function TabPanel(props) {
+    _classCallCheck(this, TabPanel);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(TabPanel).call(this, props));
+  }
+
+  _createClass(TabPanel, [{
+    key: 'suit',
+    value: function suit(props) {
+      return {
+        componentName: 'TabPanel',
+        namespace: 'lp-Tabs',
+        states: props.selected ? 'selected' : null
+      };
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      return _react2.default.createElement(
+        'li',
+        { className: getClassName(this.suit(this.props)) },
+        this.props.html
+      );
+    }
+  }]);
+
+  return TabPanel;
+})(_react.Component);
+
+exports.default = TabPanel;
+
+TabPanel.propTypes = {
+  html: _react2.default.PropTypes.string.isRequired,
+  selected: _react2.default.PropTypes.bool
+};
+
+TabPanel.defaultProps = { text: 'tab' };
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/scripts/tab-panel.js","/scripts")
+},{"_process":6,"buffer":2,"react":166,"react-dom":7,"react-suitcssify":8}],168:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _reactSuitcssify = require('react-suitcssify');
+
+var _reactSuitcssify2 = _interopRequireDefault(_reactSuitcssify);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// Suit css included as an utility method, decorator are having a issue with babel 6
+var getClassName = _reactSuitcssify2.default.utility;
+
+// @SuitCssify.decorator
+
+var Tab = (function (_Component) {
+  _inherits(Tab, _Component);
+
+  function Tab(props) {
+    _classCallCheck(this, Tab);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Tab).call(this, props));
+  }
+
+  _createClass(Tab, [{
+    key: 'suit',
+    value: function suit(props) {
+      return {
+        componentName: 'Tab',
+        namespace: 'lp-Tabs',
+        states: props.selected ? 'selected' : null
+      };
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'li',
+        { className: getClassName(this.suit(this.props)), id: 'lp-Tab-' + this.props.ix, onClick: this.props.onSelect.bind(this) },
+        this.props.text
+      );
+    }
+  }]);
+
+  return Tab;
+})(_react.Component);
+
+exports.default = Tab;
+
+Tab.propTypes = {
+  text: _react2.default.PropTypes.string.isRequired,
+  selected: _react2.default.PropTypes.bool,
+  ix: _react2.default.PropTypes.number,
+  onSelect: _react2.default.PropTypes.func
+};
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/scripts/tab.js","/scripts")
+},{"_process":6,"buffer":2,"react":166,"react-dom":7,"react-suitcssify":8}],169:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _reactSuitcssify = require('react-suitcssify');
+
+var _reactSuitcssify2 = _interopRequireDefault(_reactSuitcssify);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// Suit css included as an utility method, decorator are having a issue with babel 6
+var getClassName = _reactSuitcssify2.default.utility;
+
+// @SuitCssify.decorator
+
+var TabsBody = (function (_Component) {
+  _inherits(TabsBody, _Component);
+
+  function TabsBody(props) {
+    _classCallCheck(this, TabsBody);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(TabsBody).call(this, props));
+  }
+
+  _createClass(TabsBody, [{
+    key: 'suit',
+    value: function suit() {
+      return {
+        componentName: 'TabsBody',
+        namespace: 'lp'
+      };
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'ul',
+        { className: getClassName(this.suit()) },
+        this.props.children
+      );
+    }
+  }]);
+
+  return TabsBody;
+})(_react.Component);
+
+exports.default = TabsBody;
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/scripts/tabs-body.js","/scripts")
+},{"_process":6,"buffer":2,"react":166,"react-dom":7,"react-suitcssify":8}],170:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var TabsHash = (function (_Component) {
+  _inherits(TabsHash, _Component);
+
+  function TabsHash(props) {
+    _classCallCheck(this, TabsHash);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(TabsHash).call(this, props));
+  }
+
+  _createClass(TabsHash, [{
+    key: 'render',
+    value: function render() {
+      return null;
+    }
+  }]);
+
+  return TabsHash;
+})(_react.Component);
+
+exports.default = TabsHash;
+
+TabsHash.propTypes = {
+  selectedTab: _react2.default.PropTypes.number.isRequired
+};
+
+TabsHash.defaultProps = { selectedTab: 1 };
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/scripts/tabs-hash.js","/scripts")
+},{"_process":6,"buffer":2,"react":166,"react-dom":7}],171:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _reactSuitcssify = require('react-suitcssify');
+
+var _reactSuitcssify2 = _interopRequireDefault(_reactSuitcssify);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// Suit css included as an utility method, decorator are having a issue with babel 6
+var getClassName = _reactSuitcssify2.default.utility;
+
+// @SuitCssify.decorator
+
+var TabsHeader = (function (_Component) {
+  _inherits(TabsHeader, _Component);
+
+  function TabsHeader(props) {
+    _classCallCheck(this, TabsHeader);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(TabsHeader).call(this, props));
+  }
+
+  _createClass(TabsHeader, [{
+    key: 'suit',
+    value: function suit() {
+      return {
+        componentName: 'TabsHeader',
+        namespace: 'lp'
+      };
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'ul',
+        { className: getClassName(this.suit()) },
+        this.props.children
+      );
+    }
+  }]);
+
+  return TabsHeader;
+})(_react.Component);
+
+exports.default = TabsHeader;
+
+}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/scripts/tabs-header.js","/scripts")
+},{"_process":6,"buffer":2,"react":166,"react-dom":7,"react-suitcssify":8}],172:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _reactSuitcssify = require('react-suitcssify');
+
+var _reactSuitcssify2 = _interopRequireDefault(_reactSuitcssify);
+
+var _tabsHeader = require('./tabs-header');
+
+var _tabsHeader2 = _interopRequireDefault(_tabsHeader);
+
+var _tabsBody = require('./tabs-body');
+
+var _tabsBody2 = _interopRequireDefault(_tabsBody);
+
+var _tabsHash = require('./tabs-hash');
+
+var _tabsHash2 = _interopRequireDefault(_tabsHash);
+
+var _tab = require('./tab');
+
+var _tab2 = _interopRequireDefault(_tab);
+
+var _tabPanel = require('./tab-panel');
+
+var _tabPanel2 = _interopRequireDefault(_tabPanel);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// Suit css included as an utility method, decorator are having a issue with babel 6
+var getClassName = _reactSuitcssify2.default.utility;
+
+// @SuitCssify.decorator
+
 var Tabs = (function (_Component) {
   _inherits(Tabs, _Component);
 
   function Tabs(props) {
     _classCallCheck(this, Tabs);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Tabs).call(this, props));
+    var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(Tabs).call(this, props));
+
+    _this2.state = { selectedTabIndex: _this2.props.selectedTabIndex };
+    return _this2;
   }
 
   _createClass(Tabs, [{
     key: 'suit',
     value: function suit() {
       return {
-        className: 'arbitrary',
         componentName: 'Tabs',
-        modifiers: 'foo bar',
-        namespace: 'my',
-        states: 'active',
-        utilities: 'clearFix'
+        modifiers: 'simple',
+        namespace: 'lp'
       };
+    }
+  }, {
+    key: 'onSelect',
+    value: function onSelect(ix) {
+      this.setState({ selectedTabIndex: ix });
     }
   }, {
     key: 'render',
     value: function render() {
-      return _react2.default.createElement('div', { className: getClassName(this.suit()) });
+      var _this = this;
+
+      var tabs = [],
+          tabpanels = [];
+      var selectedTabIndex = this.state.selectedTabIndex;
+
+      this.props.items.forEach(function (item, ix) {
+        var _ix = ix + 1;
+        tabs.push(_react2.default.createElement(_tab2.default, { text: item.text, key: 'tab-' + _ix, ix: _ix, selected: selectedTabIndex === _ix, onSelect: _this.onSelect.bind(_this, _ix) }));
+        tabpanels.push(_react2.default.createElement(_tabPanel2.default, { html: item.html, ix: _ix, key: 'tab-panel-' + _ix, selected: selectedTabIndex === _ix }));
+      });
+
+      return _react2.default.createElement(
+        'div',
+        { className: getClassName(this.suit()) },
+        _react2.default.createElement(
+          _tabsHeader2.default,
+          null,
+          tabs
+        ),
+        _react2.default.createElement(
+          _tabsBody2.default,
+          null,
+          tabpanels
+        ),
+        _react2.default.createElement(_tabsHash2.default, { selectedTabIndex: this.state.selectedTabIndex })
+      );
     }
   }]);
 
@@ -22055,5 +22459,14 @@ var Tabs = (function (_Component) {
 
 exports.default = Tabs;
 
+Tabs.propTypes = {
+  items: _react2.default.PropTypes.array.isRequired,
+  selectedTabIndex: _react2.default.PropTypes.number
+};
+
+Tabs.defaultProps = { items: [{ id: 1, text: 'Tab1', html: 'hello1' }, { id: 2, text: 'Tab2', html: 'hello2' }, { id: 3, text: 'Tab3', html: 'hello3' }],
+  selectedTabIndex: 1
+};
+
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/scripts/tabs.js","/scripts")
-},{"_process":6,"buffer":2,"react":166,"react-suitcssify":8}]},{},[1]);
+},{"./tab":168,"./tab-panel":167,"./tabs-body":169,"./tabs-hash":170,"./tabs-header":171,"_process":6,"buffer":2,"react":166,"react-dom":7,"react-suitcssify":8}]},{},[1]);
