@@ -14,6 +14,7 @@ var $             = require('gulp-load-plugins')();
 var source        = require('vinyl-source-stream');
 var buffer        = require('vinyl-buffer');
 var uglify        = require('gulp-uglify');
+var minifyCss     = require('gulp-minify-css');
 
 gulp.task('css', function () {
   var processors = [
@@ -25,6 +26,7 @@ gulp.task('css', function () {
   return gulp.src('./preCSS/*.css')
     .pipe(sourcemaps.init())
     .pipe(postcss(processors))
+    .pipe(minifyCss())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('./dist'));
 });
