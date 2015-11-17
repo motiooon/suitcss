@@ -12,6 +12,8 @@ var babelify      = require("babelify");
 var util          = require('gulp-util');
 var $             = require('gulp-load-plugins')();
 var source        = require('vinyl-source-stream');
+var buffer        = require('vinyl-buffer');
+var uglify        = require('gulp-uglify');
 
 gulp.task('css', function () {
   var processors = [
@@ -44,6 +46,12 @@ var bundler = {
     return this.w && this.w.bundle()
       .on('error', $.util.log.bind($.util, 'Browserify Error'))
       .pipe(source('app.js'))
+      .pipe(buffer())
+      .pipe(sourcemaps.init())
+      // Add transformation tasks to the pipeline here.
+      .pipe(uglify())
+      .on('error', $.util.log)
+      .pipe(sourcemaps.write())
       .pipe(gulp.dest('dist'));
   },
 
